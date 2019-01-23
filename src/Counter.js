@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDom,{Component} from 'react-dom';
-import {createStore} from "./redux";
+import {createStore} from './redux';
 
 let count = (state=0,action)=>{
     if(action){
