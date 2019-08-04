@@ -43,7 +43,11 @@ class AA extends Component {
 }
 
 // 4.将state、actions映射到组件 props
-const mapStateToProps = state => ({ store: state });
+//const mapStateToProps = state => ({ store: state });
+const mapStateToProps = function (state) {
+  console.log(state)
+  return { store: state }
+}
 const mapDispatchToProps = dispatch => ({
   // 5.bindActionCreators 简化 dispatch
   actions: bindActionCreators(Actions, dispatch)

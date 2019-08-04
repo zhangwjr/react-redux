@@ -42,12 +42,12 @@ class Counter extends Component {
                     () => store.dispatch({
                         type: 'ADD'
                     })
-                }>加</button>
+                }>增加</button>
                 <button onClick={
                     () => store.dispatch({
                         type: 'SUB'
                     })
-                }>减</button>
+                }>减少</button>
             </div>
         )
     }
