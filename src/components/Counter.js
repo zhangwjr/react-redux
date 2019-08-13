@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import {
     createStore
 } from '../redux';
-
-let count = (state = 0, action) => {
+const initialState = 0;
+// reducer纯函数
+let reducer = (state = initialState, action) => {
+    console.log('prevState = ' + state, 'action = ' + action)
     if (action) {
         switch (action.type) {
             case 'ADD':
@@ -20,7 +22,7 @@ let count = (state = 0, action) => {
     }
 };
 
-let store = createStore(count);
+let store = createStore(reducer);
 
 class Counter extends Component {
     constructor() {
@@ -28,26 +30,41 @@ class Counter extends Component {
         this.state = store.getState();
     }
     componentWillMount() {
-        store.subscribe(() => {
+        let unsubscribe = store.subscribe(() => {
             this.setState({
                 state: store.getState()
             })
         })
+        unsubscribe()
+    }
+    cancel() {
+
+    }
+    addHandleClick() {
+        store.dispatch({
+            type: 'ADD'
+        })
     }
     render() {
+        /* 
+            Action是把数据从引用传到store的有效载荷，它是store数据的唯一来源，
+            一般来说我们是通过store.dispatch()将action传到store。
+            总结为，state的改变只能通过action来改变。
+            let reducer = ()=>{};
+            let store = createStore(reducer);
+            store.dispacth({type:'ADD'});
+            store.subscribe(()=>{});
+        */
         return (
             <div>
-                <p>{store.getState()}</p>
-                <button onClick={
-                    () => store.dispatch({
-                        type: 'ADD'
-                    })
-                }>增加</button>
+                <p>Redux版本: {store.getState()}</p>
+                <button onClick={this.addHandleClick}>增加</button>
                 <button onClick={
                     () => store.dispatch({
                         type: 'SUB'
                     })
                 }>减少</button>
+                <button onClick={this.cancel}>取消</button>
             </div>
         )
     }

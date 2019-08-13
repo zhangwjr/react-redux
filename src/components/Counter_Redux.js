@@ -32,7 +32,7 @@ class AA extends Component {
     const { store, actions } = this.props;
     return (
       <div>
-        <p>a = {store.a}</p>
+        <p>React-Redux: {store.a}</p>
         <p>
           <button onClick={actions.incA}>增加</button>
           <button onClick={actions.decB}>减少</button>
